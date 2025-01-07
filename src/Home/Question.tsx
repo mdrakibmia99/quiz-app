@@ -24,7 +24,7 @@ export function Question() {
     <div className="flex justify-center">
       <Card className="w-[456px]">
         <CardHeader>
-          <CardTitle>{currentQuestion.options}</CardTitle>
+          <CardTitle>{currentQuestion.question}</CardTitle>
           <CardDescription>
             Question:{currentQuestionIndex + 1} of {question.length}{" "}
           </CardDescription>
