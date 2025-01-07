@@ -17,7 +17,12 @@ const initialState: IQuiz = {
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
-  reducers: {},
+  reducers: {
+    setAnswer:(state,action)=>{
+     console.log(action.payload)
+    }
+  },
 });
+export const{setAnswer}=quizSlice.actions
 
 export default quizSlice.reducer;
