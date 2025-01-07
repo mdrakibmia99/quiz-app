@@ -48,7 +48,8 @@ export function Result() {
               //   onClick={() => handleQuestionAnswerChange(option)}
               key={index}
               size={"lg"}
-              className="w-full mt-5"
+              className={`w-full mt-5  ${currentQuestion.correctAnswer===option && 'bg-green-500'}`}
+              // className="w-full mt-5"
               variant={option === currentAnswer ? "default" : "outline"}
             >
               {option}
