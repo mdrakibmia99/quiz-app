@@ -12,10 +12,11 @@ import QuizControl from "./QuizControl";
 
 export function Question() {
   const dispatch = useAppDispatch();
-  const { currentQuestionIndex, question } = useAppSelector(
+  const { currentQuestionIndex, question, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
   const currentQuestion = question[currentQuestionIndex];
+  const currentAnswer = userAnswer[currentQuestionIndex];
   const handleQuestionAnswerChange = (answer: string) => {
     dispatch(setAnswer({ questionIndex: currentQuestionIndex, answer }));
   };
@@ -35,13 +36,14 @@ export function Question() {
               key={index}
               size={"lg"}
               className="w-full mt-5"
+              variant={option===currentAnswer? "default" : "outline"}
             >
               {option}
             </Button>
           ))}
         </CardContent>
         {/* <CardFooter className="w-full"> */}
-           <QuizControl/>
+        <QuizControl />
         {/* </CardFooter> */}
       </Card>
     </div>
