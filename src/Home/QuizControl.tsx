@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { nextQuestion } from "@/redux/features/quiz/quizSlice";
+import { nextQuestion, previousQuestion } from "@/redux/features/quiz/quizSlice";
 import { useAppDispatch } from "@/redux/hooks";
 
 const QuizControl = () => {
@@ -7,9 +7,12 @@ const QuizControl = () => {
   const handleNextQuestion = () => {
     dispatch(nextQuestion());
   };
+  const handlePreviousQuestion = () => {
+    dispatch(previousQuestion());
+  };
   return (
     <div className="flex justify-between p-6">
-      <Button> Previous</Button>
+      <Button onClick={handlePreviousQuestion}> Previous</Button>
       <Button onClick={handleNextQuestion}> Next</Button>
     </div>
   );
