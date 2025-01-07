@@ -1,9 +1,12 @@
+import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { quizResultCheck } from "@/redux/features/quiz/quizSlice";
 
-import { useAppSelector } from "@/redux/hooks";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 
 export default function QuizSummery() {
+  const dispatch=useAppDispatch()
   const { question, userAnswer } = useAppSelector((state) => state.quiz);
   const correctAnswerCount = question.reduce((count, qn, index) => {
     return qn.correctAnswer === userAnswer[index] ? count + 1 : count;
@@ -48,6 +51,9 @@ export default function QuizSummery() {
             Great job! Keep practicing to improve your performance.
           </p>
         </div>
+        <Button
+        onClick={()=>dispatch(quizResultCheck())}
+        className="mt-5">Check Quiz Result</Button>
       </CardContent>
     </Card>
   );

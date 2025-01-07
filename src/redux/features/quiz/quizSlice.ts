@@ -6,6 +6,7 @@ interface IQuiz {
   currentQuestionIndex: number;
   userAnswer: (string | null)[];
   quizComplete: boolean;
+  moreResultInfo:boolean;  
 }
 
 const initialState: IQuiz = {
@@ -13,6 +14,7 @@ const initialState: IQuiz = {
   currentQuestionIndex: 0,
   userAnswer: Array(quizData.length).fill(null),
   quizComplete: false,
+  moreResultInfo:false
 };
 export const quizSlice = createSlice({
   name: "quiz",
@@ -32,8 +34,12 @@ export const quizSlice = createSlice({
     completeQuestion: (state) => {
       state.quizComplete = true;
   },
+    quizResultCheck: (state) => {
+      state.moreResultInfo = true;
+      state.currentQuestionIndex = 0;
+  },
   },
 });
-export const { setAnswer, nextQuestion,previousQuestion ,completeQuestion} = quizSlice.actions;
+export const { setAnswer, nextQuestion,previousQuestion ,completeQuestion,quizResultCheck} = quizSlice.actions;
 
 export default quizSlice.reducer;
