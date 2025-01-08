@@ -36,4 +36,13 @@ npm run dev
 ## Features and Requirements
  
  #### complete all quiz step by step
-![Quiz img](relative/path/to/image.png)
+![Quiz img](./src/assets/images/1.png)
+
+#### User will see his/her result after completing the quiz
+![Quiz img](./src/assets/images/2.png)
+
+#### if you want to see the result information just click the check Quiz Result button
+![Quiz img](./src/assets/images/3.png)
+
+#### Result
+![Quiz img](./src/assets/images/4.png)
