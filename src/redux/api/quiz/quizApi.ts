@@ -26,7 +26,12 @@ export const quizApi = createApi({
         data,
       }),
     }),
-  
+    deleteQuiz: builder.mutation({
+      query: (id) => ({
+        url: `/quizzes/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
