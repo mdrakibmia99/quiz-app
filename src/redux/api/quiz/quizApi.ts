@@ -19,7 +19,14 @@ export const quizApi = createApi({
       }),
       invalidatesTags: ["Quiz"],
     }),
-   
+    updateQuiz: builder.mutation({
+      query: ({id,data},) => ({
+        url: `/quizzes/${id}`,
+        method: "PATCH",
+        data,
+      }),
+    }),
+  
   }),
 });
 
