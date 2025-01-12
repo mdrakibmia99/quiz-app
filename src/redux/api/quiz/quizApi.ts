@@ -10,8 +10,17 @@ export const quizApi = createApi({
       query: () => `/quizzes`,
       providesTags: ["Quiz"],
     }),
-  
+    addQuiz: builder.mutation({
+      query: (body) => ({
+    
+        url: `/quizzes`,
+        method: "POST",
+        body,
+      }),
+      invalidatesTags: ["Quiz"],
+    }),
+   
   }),
 });
 
-export const { useGetAllQuizQuery } = quizApi;
+export const { useGetAllQuizQuery,useAddQuizMutation } = quizApi;
