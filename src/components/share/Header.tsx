@@ -2,12 +2,17 @@ import { logout } from "@/redux/features/auth/authSlice";
 import { useAppDispatch } from "@/redux/hooks";
 import { Link } from "react-router-dom";
 import { Button } from "../ui/button";
+import { useLogOutMutation } from "@/redux/features/auth/authApi";
+import { toast } from "sonner";
 
 const Header = () => {
   const dispatch = useAppDispatch();
+  const [logOut]=useLogOutMutation()
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     dispatch(logout());
+    await logOut({})
+    toast.success('logout!')
   };
   return (
     <div className="shadow-lg py-3">
