@@ -3,7 +3,7 @@ import QuizSummery from "./Home/QuizSummery";
 import { Result } from "./Home/Result";
 import { useAppSelector } from "./redux/hooks";
 
-export default function Home() {
+export default function App() {
   const { quizComplete, moreResultInfo } = useAppSelector(
     (state) => state.quiz
   );
