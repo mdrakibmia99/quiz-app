@@ -8,9 +8,14 @@ export default function App() {
   //   (state) => state.quiz
   // );
   return (
-    <ProtectedRoute>
+   
       <MainLayout/>
-      {/* <div>
+     
+    
+  );
+}
+
+ {/* <div>
         <Header />
         <h1 className="text-center text-9xl my-12">Quiz App</h1>
         {moreResultInfo ? (
@@ -21,6 +26,3 @@ export default function App() {
           <Question />
         )}
       </div> */}
-    </ProtectedRoute>
-  );
-}
