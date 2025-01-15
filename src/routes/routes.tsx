@@ -1,12 +1,19 @@
 import App from "@/App";
+import ProtectedRoute from "@/components/layout/ProtectedRoute";
 import Login from "@/pages/Login";
+import NotFoundPage from "@/pages/NotFoundPage";
 
 import SignUp from "@/pages/SignUp";
+import UserQuizTest from "@/pages/UserQuizTest";
 import { createBrowserRouter } from "react-router-dom";
 const router = createBrowserRouter([
   {
     path: "/",
     element: <App />
+  },
+  {
+    path: "/quiz/:id",
+    element: <ProtectedRoute><UserQuizTest /></ProtectedRoute> 
   },
   {
     path: "/login",
@@ -15,6 +22,10 @@ const router = createBrowserRouter([
   {
     path: "/registration",
     element: <SignUp />
+  },
+  {
+    path: "*",
+    element: <NotFoundPage />,
   },
 ]);
 
