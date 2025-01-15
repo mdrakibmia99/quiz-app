@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -15,6 +16,7 @@ export function Question() {
   const { currentQuestionIndex, question, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
+  
   const currentQuestion = question[currentQuestionIndex];
   const currentAnswer = userAnswer[currentQuestionIndex];
   const handleQuestionAnswerChange = (answer: string) => {
@@ -30,7 +32,7 @@ export function Question() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {currentQuestion.options.map((option, index) => (
+          {currentQuestion.options.map((option:any, index:any) => (
             <Button
               onClick={() => handleQuestionAnswerChange(option)}
               key={index}
