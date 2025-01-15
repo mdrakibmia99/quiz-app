@@ -18,7 +18,9 @@ const QuizControl = () => {
     dispatch(previousQuestion());
   };
   const handleCompletedQuestion=() => {
+    
     dispatch(completeQuestion());
+
   }
   const isCompleteQuiz =
     isAnswerQuiz || currentQuestionIndex !== question.length - 1;
