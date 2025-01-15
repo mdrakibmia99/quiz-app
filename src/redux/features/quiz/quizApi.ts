@@ -9,7 +9,14 @@ const authApi = baseApi.injectEndpoints({
 
       }),
     }),
+    getSingleQuiz: builder.query({
+      query: (quizId) => ({
+        url: `/quizzes/${quizId}`,
+        method: "GET",
+
+      }),
+    }),
   }),
 });
 
-export const {useGetAllQuizQuery}=authApi
+export const {useGetAllQuizQuery,useGetSingleQuizQuery}=authApi
