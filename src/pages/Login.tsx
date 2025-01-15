@@ -51,14 +51,15 @@ export default function Login() {
         toast.error('Something went wrong', { id: toastId, duration: 2000 });
     }
   }
-console.log(login,"login data")
   return (
     <div className="h-svh w-full grid place-items-center p-10">
+      
       <Form {...form}>
-        <div className=" mx-auto p-2 lg:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-60">
+        <div className="relative mx-auto p-2 lg:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-60">
+          <p onClick={()=>navigate('/')} className="border inline font-bold shadow-md hover:shadow-sm hover:cursor-pointer px-3 py-1 rounded-full absolute top-0 right-0 m-2">X</p>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 "
+          className="space-y-8 mt-2"
         >
           <FormField
             control={form.control}
