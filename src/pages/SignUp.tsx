@@ -12,10 +12,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { PasswordInput } from "@/components/ui/password-input";
 
 export default function SignUp() {
+  const navigate=useNavigate()
   const form = useForm({
     defaultValues: {
       name: "",
@@ -31,7 +32,8 @@ export default function SignUp() {
   return (
     <div className="h-svh w-full grid place-items-center">
       <Form {...form}>
-        <div className="mx-auto p-1 lg:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-60">
+        <div className="mx-auto p-1 relative lg:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-60">
+        <p onClick={()=>navigate('/')} className="border inline font-bold shadow-md hover:shadow-sm hover:cursor-pointer px-3 py-1 rounded-full absolute top-0 right-0 m-2">X</p>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 ">
             <FormField
               control={form.control}
