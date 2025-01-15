@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { quizData } from "@/data/quizData";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IQuiz {
-  question: typeof quizData;
+  question:any;
   currentQuestionIndex: number;
   userAnswer: (string | null)[];
   quizComplete: boolean;
@@ -10,7 +11,7 @@ interface IQuiz {
 }
 
 const initialState: IQuiz = {
-  question: quizData,
+  question: null,
   currentQuestionIndex: 0,
   userAnswer: Array(quizData.length).fill(null),
   quizComplete: false,
@@ -25,7 +26,7 @@ export const quizSlice = createSlice({
       state.userAnswer[questionIndex] = answer;
     },
     nextQuestion: (state) => {
-      if (state.currentQuestionIndex < state.question.length - 1)
+      if (state?.question && state.currentQuestionIndex < state?.question.length - 1)
         state.currentQuestionIndex += 1;
     },
     previousQuestion: (state) => {
@@ -38,8 +39,11 @@ export const quizSlice = createSlice({
       state.moreResultInfo = true;
       state.currentQuestionIndex = 0;
   },
+    setQuiz: (state,{payload}) => {
+      state.question = payload; 
+  },
   },
 });
-export const { setAnswer, nextQuestion,previousQuestion ,completeQuestion,quizResultCheck} = quizSlice.actions;
+export const { setAnswer,setQuiz, nextQuestion,previousQuestion ,completeQuestion,quizResultCheck} = quizSlice.actions;
 
 export default quizSlice.reducer;
