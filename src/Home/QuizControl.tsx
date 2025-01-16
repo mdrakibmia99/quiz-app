@@ -4,10 +4,14 @@ import {
   nextQuestion,
   previousQuestion,
 } from "@/redux/features/quiz/quizSlice";
+import { useCreateUserQuizResultMutation } from "@/redux/features/quizResult/quizResultApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useParams } from "react-router-dom";
 
 const QuizControl = () => {
+  const { id } = useParams();
   const dispatch = useAppDispatch();
+  const [quizResultCreate]=useCreateUserQuizResultMutation()
   const { currentQuestionIndex, question, userAnswer, quizComplete } =
     useAppSelector((state) => state.quiz);
   const isAnswerQuiz = userAnswer[currentQuestionIndex] !== null;
@@ -17,8 +21,9 @@ const QuizControl = () => {
   const handlePreviousQuestion = () => {
     dispatch(previousQuestion());
   };
-  const handleCompletedQuestion=() => {
-    
+  const handleCompletedQuestion=async() => {
+  const quizResult={quizId:id,userAnswer}
+    await quizResultCreate(quizResult)
     dispatch(completeQuestion());
 
   }
@@ -44,7 +49,7 @@ const QuizControl = () => {
       {currentQuestionIndex === question.length - 1 && !quizComplete && (
         <Button
         onClick={handleCompletedQuestion}
-        disabled={!isCompleteQuiz}> Quiz Complete</Button>
+        disabled={userAnswer.length !== question.length}> Quiz Complete</Button>
       )}
     </div>
   );
