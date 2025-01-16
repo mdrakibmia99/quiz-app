@@ -16,6 +16,10 @@ export function Question() {
   const { currentQuestionIndex, question, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
+    // Ensure the question array and current question exist
+    if (!question || question.length === 0) {
+      return <div>No questions available.</div>;
+    }
   
   const currentQuestion = question[currentQuestionIndex];
   const currentAnswer = userAnswer[currentQuestionIndex];
