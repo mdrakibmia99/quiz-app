@@ -108,7 +108,7 @@ export default function Login() {
             )}
           />
 
-          <Button className="w-full" type="submit">Submit</Button>
+          <Button className="w-full" type="submit">LOG IN</Button>
           </form>
            <div className="pt-5 text-center">
             <div className="flex w-full justify-between items-center gap-3"> 
