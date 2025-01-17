@@ -10,10 +10,12 @@ import {
 import { setAnswer } from "@/redux/features/quiz/quizSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import QuizControl from "./QuizControl";
+import { useState } from "react";
 
 export function Question() {
   const dispatch = useAppDispatch();
-  const { currentQuestionIndex, question, userAnswer } = useAppSelector(
+  const [currentQuestionIndex,setCurrentQuestionIndex]=useState(0)
+  const {  question, userAnswer } = useAppSelector(
     (state) => state.quiz
   );
     // Ensure the question array and current question exist
@@ -49,7 +51,7 @@ export function Question() {
           ))}
         </CardContent>
         {/* <CardFooter className="w-full"> */}
-        <QuizControl />
+        <QuizControl setCurrentQuestionIndex={setCurrentQuestionIndex} currentQuestionIndex={currentQuestionIndex}/>
         {/* </CardFooter> */}
       </Card>
     </div>
