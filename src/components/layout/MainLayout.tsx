@@ -33,7 +33,7 @@ const MainLayout = () => {
   if (isLoading) {
     return <h1>Loading...</h1>;
   }
-  console.log(data, "quiz data");
+
   return (
     <div>
       <Header />
