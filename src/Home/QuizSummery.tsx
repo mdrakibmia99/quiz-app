@@ -1,14 +1,15 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { quizResultCheck } from "@/redux/features/quiz/quizSlice";
 
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import {  useAppSelector } from "@/redux/hooks";
 
-export default function QuizSummery() {
-  const dispatch=useAppDispatch()
+export default function QuizSummery({setMoreResultInfo}:{setMoreResultInfo:any}) {
+  // const dispatch=useAppDispatch()
   const { question, userAnswer } = useAppSelector((state) => state.quiz);
-  const correctAnswerCount = question.reduce((count, qn, index) => {
+  const correctAnswerCount = question.reduce((count:any, qn:any, index:any) => {
     return qn.correctAnswer === userAnswer[index] ? count + 1 : count;
   }, 0);
   const correctProgressValue = parseFloat(
@@ -52,7 +53,8 @@ export default function QuizSummery() {
           </p>
         </div>
         <Button
-        onClick={()=>dispatch(quizResultCheck())}
+        // onClick={()=>dispatch(quizResultCheck())}
+        onClick={()=>setMoreResultInfo(true)}
         className="mt-5">Check Quiz Result</Button>
       </CardContent>
     </Card>
