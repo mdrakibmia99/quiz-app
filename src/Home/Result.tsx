@@ -16,10 +16,10 @@ import {
 } from "@/redux/features/quiz/quizSlice";
 import { useState } from "react";
 
-export function Result() {
+export function Result({userAnswer}:{userAnswer:string[]}) {
   const dispatch = useAppDispatch();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { question, userAnswer } = useAppSelector((state) => state.quiz);
+  const { question } = useAppSelector((state) => state.quiz);
   const currentQuestion = question[currentQuestionIndex];
   const currentAnswer = userAnswer[currentQuestionIndex];
   const handleNextQuestion = () => {
