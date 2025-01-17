@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { quizData } from "@/data/quizData";
 import { createSlice } from "@reduxjs/toolkit";
 
 interface IQuiz {
-  question:any;
+  question: any;
   currentQuestionIndex: number;
   userAnswer: (string | null)[];
   quizComplete: boolean;
-  moreResultInfo:boolean;  
+  moreResultInfo: boolean;
 }
 
 const initialState: IQuiz = {
@@ -15,18 +14,25 @@ const initialState: IQuiz = {
   currentQuestionIndex: 0,
   userAnswer: [],
   quizComplete: false,
-  moreResultInfo:false
+  moreResultInfo: false,
 };
 export const quizSlice = createSlice({
   name: "quiz",
   initialState,
   reducers: {
     setAnswer: (state, action) => {
-      const { questionIndex, answer } = action.payload;
-      state.userAnswer[questionIndex] = answer;
+      if (Array.isArray(action.payload)) {
+        state.userAnswer = [];
+      } else {
+        const { questionIndex, answer } = action.payload;
+        state.userAnswer[questionIndex] = answer;
+      }
     },
     nextQuestion: (state) => {
-      if (state?.question && state.currentQuestionIndex < state?.question.length - 1)
+      if (
+        state?.question &&
+        state.currentQuestionIndex < state?.question.length - 1
+      )
         state.currentQuestionIndex += 1;
     },
     previousQuestion: (state) => {
@@ -34,16 +40,23 @@ export const quizSlice = createSlice({
     },
     completeQuestion: (state) => {
       state.quizComplete = true;
-  },
+    },
     quizResultCheck: (state) => {
       state.moreResultInfo = true;
       state.currentQuestionIndex = 0;
-  },
-    setQuiz: (state,{payload}) => {
-      state.question = payload; 
-  },
+    },
+    setQuiz: (state, { payload }) => {
+      state.question = payload;
+    },
   },
 });
-export const { setAnswer,setQuiz, nextQuestion,previousQuestion ,completeQuestion,quizResultCheck} = quizSlice.actions;
+export const {
+  setAnswer,
+  setQuiz,
+  nextQuestion,
+  previousQuestion,
+  completeQuestion,
+  quizResultCheck,
+} = quizSlice.actions;
 
 export default quizSlice.reducer;
