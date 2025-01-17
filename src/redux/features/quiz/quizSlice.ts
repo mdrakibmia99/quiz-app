@@ -13,7 +13,7 @@ interface IQuiz {
 const initialState: IQuiz = {
   question: null,
   currentQuestionIndex: 0,
-  userAnswer: Array(quizData.length).fill(null),
+  userAnswer: [],
   quizComplete: false,
   moreResultInfo:false
 };
