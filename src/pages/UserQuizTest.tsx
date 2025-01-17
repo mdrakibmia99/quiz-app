@@ -1,4 +1,5 @@
 import Header from "@/components/share/Header";
+import Loading from "@/components/share/Loading";
 import { Question } from "@/Home/Question";
 import QuizSummery from "@/Home/QuizSummery";
 import { Result } from "@/Home/Result";
@@ -26,25 +27,25 @@ const UserQuizTest = () => {
   useEffect(()=>{
     setMainLoading(true)
     if(!isLoading && data){
-      console.log(data,"check quiz data")    
+      // console.log(data,"check quiz data")    
       dispatch(setQuiz(data.data.questions))
-      console.log(data,"check quiz dataasdfasdfasdfsf")
+      // console.log(data,"check quiz dataasdfasdfasdfsf")
       setMainLoading(false)    
     }
     setMainLoading(false)
   },[isLoading,data])
-  console.log(id, "check user id");
+  console.log(data, "check user id");
   if (!isLoading && !data) {
     navigate("/");
   }
   
   if (isLoading || mainLoading || quizResultLoading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 console.log(quizResultData,"quizResultData")
   return (
     <div className="w-full h-full">
-      <Header />
+      {/* <Header /> */}
       <div className="grid place-items-center min-h-svh w-full">
         {moreResultInfo ? (
           <Result />
