@@ -14,12 +14,13 @@ import { selectCurrentToken } from "@/redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import { setAnswer } from "@/redux/features/quiz/quizSlice";
+import Loading from "../share/Loading";
 
 const MainLayout = () => {
   const token = useAppSelector(selectCurrentToken);
   const dispatch=useAppDispatch()
   const navigate=useNavigate()
-  const { data, isLoading } = useGetAllQuizQuery(undefined);
+  const { data, isLoading,isError } = useGetAllQuizQuery(undefined);
   const handleQuizStart=(quizId:string)=>{
     if(token){
        dispatch(setAnswer([]));
@@ -29,9 +30,9 @@ const MainLayout = () => {
     }
   }
   if (isLoading) {
-    return <h1>Loading...</h1>;
+    return <Loading/>;
   }
-
+console.log(data,isError,"all data loaded")
   return (
     <div>
       <Header />
