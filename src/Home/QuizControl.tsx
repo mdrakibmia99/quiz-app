@@ -15,7 +15,7 @@ const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQ
   const [quizResultCreate]=useCreateUserQuizResultMutation()
   const {  question, userAnswer, quizComplete } =
     useAppSelector((state) => state.quiz);
-  const isAnswerQuiz = userAnswer[currentQuestionIndex] !== null;
+  const isAnswerQuiz = userAnswer[currentQuestionIndex];
   const handleNextQuestion = () => {
     setCurrentQuestionIndex(currentQuestionIndex+1)
     dispatch(nextQuestion());
