@@ -26,7 +26,7 @@ const Header = () => {
           <Button onClick={handleLogout}>Logout</Button>
         ) : (
           <Link to="/login" className="hover:text-indigo-900">
-            <Button onClick={handleLogout}>Login</Button>
+            <Button >Login</Button>
           </Link>
         )}
       </div>
