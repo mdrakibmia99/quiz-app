@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -13,18 +14,20 @@ import {
   nextQuestion,
   previousQuestion,
 } from "@/redux/features/quiz/quizSlice";
+import { useState } from "react";
 
 export function Result() {
   const dispatch = useAppDispatch();
-  const { currentQuestionIndex, question, userAnswer } = useAppSelector(
-    (state) => state.quiz
-  );
+  const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
+  const { question, userAnswer } = useAppSelector((state) => state.quiz);
   const currentQuestion = question[currentQuestionIndex];
   const currentAnswer = userAnswer[currentQuestionIndex];
   const handleNextQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex + 1);
     dispatch(nextQuestion());
   };
   const handlePreviousQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex - 1);
     dispatch(previousQuestion());
   };
   const isAnswerQuiz = userAnswer[currentQuestionIndex] !== null;
@@ -43,12 +46,14 @@ export function Result() {
           </CardDescription>
         </CardHeader>
         <CardContent>
-          {currentQuestion.options.map((option, index) => (
+          {currentQuestion?.options.map((option:string, index:any) => (
             <Button
               //   onClick={() => handleQuestionAnswerChange(option)}
               key={index}
               size={"lg"}
-              className={`w-full mt-5  ${currentQuestion.correctAnswer===option && 'bg-green-500'}`}
+              className={`w-full mt-5  ${
+                currentQuestion.correctAnswer === option && "bg-green-500"
+              }`}
               // className="w-full mt-5"
               variant={option === currentAnswer ? "default" : "outline"}
             >
