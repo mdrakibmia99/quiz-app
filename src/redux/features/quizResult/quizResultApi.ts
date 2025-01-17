@@ -9,12 +9,14 @@ const authApi = baseApi.injectEndpoints({
         method: "POST",
         body: quizInfo,
       }),
+      invalidatesTags: ['userQuizResult'],
     }),
     userQuizResult: builder.query({
       query: (quizId) => ({
         url: `/quiz/result/${quizId}`,
         method: "GET",
       }),
+      providesTags: ['userQuizResult'],
     }),
   }),
 });
