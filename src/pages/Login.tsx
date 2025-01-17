@@ -32,7 +32,7 @@ export default function Login() {
   });
 
   async function onSubmit(values: FieldValues) {
-    console.log(values);
+
     const toastId = toast.loading('Logging in');
     try{
         const userInfo={
@@ -40,13 +40,13 @@ export default function Login() {
             password:values.password
         }
         const res=await login(userInfo).unwrap();
-        console.log(res,"res")
+
         const user = verifyToken(res.data.token)
         dispatch(setUser({user:user,token:res?.data.token}))
         toast.success('Logged in', { id: toastId, duration: 2000 });
         navigate(`/`);
 
-        console.log(res,"rest")
+
     }catch{
         toast.error('Something went wrong', { id: toastId, duration: 2000 });
     }
