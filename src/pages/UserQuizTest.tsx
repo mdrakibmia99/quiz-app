@@ -5,7 +5,7 @@ import { Result } from "@/Home/Result";
 import { useGetSingleQuizQuery } from "@/redux/features/quiz/quizApi";
 import { setQuiz } from "@/redux/features/quiz/quizSlice";
 import { useUserQuizResultQuery } from "@/redux/features/quizResult/quizResultApi";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -16,11 +16,12 @@ const UserQuizTest = () => {
   const [mainLoading,setMainLoading]=useState(false)
 
 
-  const { quizComplete, moreResultInfo ,} = useAppSelector(
-    (state) => state.quiz
-  );
+  // const { quizComplete, moreResultInfo ,} = useAppSelector(
+  //   (state) => state.quiz
+  // );
   const { data, isLoading } = useGetSingleQuizQuery(id);
   const { data:quizResultData, isLoading:quizResultLoading } = useUserQuizResultQuery(id);
+  const [moreResultInfo,setMoreResultInfo] =useState(false)
 
   useEffect(()=>{
     setMainLoading(true)
@@ -48,7 +49,7 @@ console.log(quizResultData,"quizResultData")
         {moreResultInfo ? (
           <Result />
         ) : quizResultData?.data?.quizComplete ? (
-          <QuizSummery />
+          <QuizSummery setMoreResultInfo={setMoreResultInfo}/>
         ) : (
           <Question />
           )}
