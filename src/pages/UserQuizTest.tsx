@@ -1,4 +1,4 @@
-import Header from "@/components/share/Header";
+
 import Loading from "@/components/share/Loading";
 import { Question } from "@/Home/Question";
 import QuizSummery from "@/Home/QuizSummery";
