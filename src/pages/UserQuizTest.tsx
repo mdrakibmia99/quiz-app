@@ -48,7 +48,7 @@ console.log(quizResultData,"quizResultData")
       {/* <Header /> */}
       <div className="grid place-items-center min-h-svh w-full">
         {moreResultInfo ? (
-          <Result />
+          <Result userAnswer={quizResultData?.data.userAnswer}/>
         ) : quizResultData?.data?.quizComplete ? (
           <QuizSummery setMoreResultInfo={setMoreResultInfo}/>
         ) : (
