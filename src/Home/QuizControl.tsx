@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Button } from "@/components/ui/button";
 import {
     completeQuestion,
@@ -8,17 +9,19 @@ import { useCreateUserQuizResultMutation } from "@/redux/features/quizResult/qui
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { useParams } from "react-router-dom";
 
-const QuizControl = () => {
+const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQuestionIndex:any,currentQuestionIndex:number}) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const [quizResultCreate]=useCreateUserQuizResultMutation()
-  const { currentQuestionIndex, question, userAnswer, quizComplete } =
+  const {  question, userAnswer, quizComplete } =
     useAppSelector((state) => state.quiz);
   const isAnswerQuiz = userAnswer[currentQuestionIndex] !== null;
   const handleNextQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex+1)
     dispatch(nextQuestion());
   };
   const handlePreviousQuestion = () => {
+    setCurrentQuestionIndex(currentQuestionIndex-1)
     dispatch(previousQuestion());
   };
   const handleCompletedQuestion=async() => {
@@ -27,8 +30,8 @@ const QuizControl = () => {
     dispatch(completeQuestion());
 
   }
-  const isCompleteQuiz =
-    isAnswerQuiz || currentQuestionIndex !== question.length - 1;
+  // const isCompleteQuiz =
+  //   isAnswerQuiz || currentQuestionIndex !== question.length - 1;
 
   return (
     <div className="flex justify-between p-6">
