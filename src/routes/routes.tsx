@@ -1,5 +1,6 @@
 import App from "@/App";
 import ProtectedRoute from "@/components/layout/ProtectedRoute";
+import Header from "@/components/share/Header";
 import Login from "@/pages/Login";
 import NotFoundPage from "@/pages/NotFoundPage";
 
@@ -13,7 +14,10 @@ const router = createBrowserRouter([
   },
   {
     path: "/quiz/:id",
-    element: <ProtectedRoute><UserQuizTest /></ProtectedRoute> 
+    element: <ProtectedRoute>
+      <Header/>
+      <UserQuizTest />
+      </ProtectedRoute> 
   },
   {
     path: "/login",

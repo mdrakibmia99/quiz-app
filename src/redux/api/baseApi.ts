@@ -11,7 +11,7 @@ import { RootState } from "../store";
 import { logout, setUser } from "../features/auth/authSlice";
 
 const baseQuery = fetchBaseQuery({
-  baseUrl: "http://localhost:5000/api",
+  baseUrl: import.meta.env.VITE_REACT_APP_SERVER_URI  ,
   credentials: "include",
   prepareHeaders: (headers, { getState }) => {
     const token = (getState() as RootState).auth.token;
@@ -31,7 +31,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   //  console.log(result,"check for error");
   if (result?.error?.status === 401) {
     console.log("sending refresh token");
-    const res = await fetch("http://localhost:5000/api/auth/refresh-token", {
+    const res = await fetch(`${import.meta.env.VITE_REACT_APP_SERVER_URI}/auth/refresh-token`, {
       method: "post",
       credentials: "include",
     });
