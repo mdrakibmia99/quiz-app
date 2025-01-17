@@ -65,6 +65,13 @@ export default function Login() {
           <FormField
             control={form.control}
             name="email"
+            rules={{
+              required: "Email is required",
+              pattern: {
+                value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                message: "Enter a valid email",
+              },
+            }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Email</FormLabel>
@@ -82,6 +89,13 @@ export default function Login() {
           <FormField
             control={form.control}
             name="password"
+            rules={{
+              required: "Password is required",
+              minLength: {
+                value: 6,
+                message: "Password must be at least 6 characters",
+              },
+            }}
             render={({ field }) => (
               <FormItem>
                 <FormLabel>Password</FormLabel>
