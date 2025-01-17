@@ -1,8 +1,6 @@
-import { useAppSelector } from "@/redux/hooks";
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import Header from "../share/Header";
-import { Result } from "@/Home/Result";
-import QuizSummery from "@/Home/QuizSummery";
-import { Question } from "@/Home/Question";
 import { useGetAllQuizQuery } from "@/redux/features/quiz/quizApi";
 import {
   Card,
@@ -15,16 +13,16 @@ import { Button } from "../ui/button";
 import { selectCurrentToken } from "@/redux/features/auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
+import { setAnswer } from "@/redux/features/quiz/quizSlice";
 
 const MainLayout = () => {
   const token = useAppSelector(selectCurrentToken);
+  const dispatch=useAppDispatch()
   const navigate=useNavigate()
-  const { quizComplete, moreResultInfo } = useAppSelector(
-    (state) => state.quiz
-  );
   const { data, isLoading } = useGetAllQuizQuery(undefined);
-  const handleQuizStart=(quizId:any)=>{
+  const handleQuizStart=(quizId:string)=>{
     if(token){
+       dispatch(setAnswer([]));
      navigate(`quiz/${quizId}`)
     }else{
       toast.warning('Please Login first!')
