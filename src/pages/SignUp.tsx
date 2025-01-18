@@ -51,7 +51,7 @@ export default function SignUp() {
   return (
     <div className="h-svh w-full grid place-items-center">
       <Form {...form}>
-        <div className="mx-auto p-1 relative lg:p-10 md:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-96">
+        <div className="mx-auto p-1 relative lg:p-10 md:p-10 shadow-lg hover:shadow-xl rounded-sm w-full lg:w-96 md:w-96">
           <p
             onClick={() => navigate("/")}
             className="border inline font-bold shadow-md hover:shadow-sm hover:cursor-pointer px-3 py-1 rounded-full absolute top-0 right-0 m-2"
