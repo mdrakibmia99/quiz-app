@@ -40,8 +40,17 @@ npm run dev
 ```
 
 ## Features and Requirements
- 
- #### complete all quiz step by step
+### Before Login
+ Home Page
+
+ ![Quiz Home page Image](./src/assets/images/homePage.png)
+#### Login Page:
+![Quiz login page image](./src/assets/images/loginPage.png)
+#### SignUp Page:
+![Quiz signUp page image](./src/assets/images/sigupPage.png)
+
+## After Login: user can start quiz
+#### complete all quiz step by step
 ![Quiz img](./src/assets/images/1.png)
 
 #### User will see his/her result after completing the quiz
