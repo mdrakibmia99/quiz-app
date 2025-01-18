@@ -26,8 +26,14 @@ cd quiz-app
 npm install
 ```
 ---
+### **create .env in root file:**
+```
+VITE_REACT_APP_SERVER_URI=YOUR_SERVER_URI
 
+```
 ---
+
+
 #### Run Project:
 ```
 npm run dev 
