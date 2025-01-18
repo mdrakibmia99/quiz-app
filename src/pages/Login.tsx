@@ -55,7 +55,7 @@ export default function Login() {
     <div className="h-svh w-full grid place-items-center p-10">
       
       <Form {...form}>
-        <div className="relative mx-auto p-2 lg:p-10 md:p-10 border-b-slate-600 border-2 rounded-sm w-full lg:w-96 md:w-96">
+        <div className="relative mx-auto p-2 lg:p-10 md:p-10  shadow-lg hover:shadow-xl rounded-sm w-full lg:w-96 md:w-96">
           <p onClick={()=>navigate('/')} className="border inline font-bold shadow-md hover:shadow-sm hover:cursor-pointer px-3 py-1 rounded-full absolute top-0 right-0 m-2">X</p>
           <h2 className="text-center mt-5 text-2xl font-semibold uppercase my-3">sign in</h2>
         <form
