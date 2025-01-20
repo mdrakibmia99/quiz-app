@@ -7,13 +7,15 @@ import {
 } from "@/redux/features/quiz/quizSlice";
 import { useCreateUserQuizResultMutation } from "@/redux/features/quizResult/quizResultApi";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { IQuestion } from "@/types/quiz.type";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
-const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQuestionIndex:any,currentQuestionIndex:number}) => {
+const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex,question}:{setCurrentQuestionIndex:any,currentQuestionIndex:number,question:IQuestion[]}) => {
   const { id } = useParams();
   const dispatch = useAppDispatch();
   const [quizResultCreate]=useCreateUserQuizResultMutation()
-  const {  question, userAnswer, quizComplete } =
+  const {  userAnswer } =
     useAppSelector((state) => state.quiz);
   const isAnswerQuiz = userAnswer[currentQuestionIndex];
   const handleNextQuestion = () => {
@@ -27,6 +29,7 @@ const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQ
   const handleCompletedQuestion=async() => {
   const quizResult={quizId:id,userAnswer}
     await quizResultCreate(quizResult)
+    toast.success('quiz completed')
     dispatch(completeQuestion());
 
   }
@@ -36,7 +39,7 @@ const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQ
   return (
     <div className="flex justify-between p-6">
       <Button
-        disabled={currentQuestionIndex === 0 || quizComplete}
+        disabled={currentQuestionIndex === 0}
         onClick={handlePreviousQuestion}
       >
         {" "}
@@ -49,7 +52,7 @@ const QuizControl = ({setCurrentQuestionIndex,currentQuestionIndex}:{setCurrentQ
         </Button>
       )}
 
-      {currentQuestionIndex === question.length - 1 && !quizComplete && (
+      {currentQuestionIndex === question.length - 1 && (
         <Button
         onClick={handleCompletedQuestion}
         disabled={userAnswer.length !== question.length}> Quiz Complete</Button>
