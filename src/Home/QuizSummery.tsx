@@ -1,17 +1,28 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-unused-vars */
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { useAppSelector } from "@/redux/hooks";
+import { IQuestion } from "@/types/quiz.type";
 
-import {  useAppSelector } from "@/redux/hooks";
-
-export default function QuizSummery({setMoreResultInfo}:{setMoreResultInfo:any}) {
+export default function QuizSummery({
+  setMoreResultInfo,
+  question,
+}: {
+  setMoreResultInfo: any;
+  question: IQuestion[];
+}) {
   // const dispatch=useAppDispatch()
-  const { question, userAnswer } = useAppSelector((state) => state.quiz);
-  const correctAnswerCount = question.reduce((count:any, qn:any, index:any) => {
-    return qn.correctAnswer === userAnswer[index] ? count + 1 : count;
-  }, 0);
+
+  const { userAnswer } = useAppSelector((state) => state.quiz);
+  const correctAnswerCount = question.reduce(
+    (count: any, qn: any, index: any) => {
+      return qn.correctAnswer === userAnswer[index] ? count + 1 : count;
+    },
+    0
+  );
   const correctProgressValue = parseFloat(
     ((correctAnswerCount / question.length) * 100).toFixed(2)
   );
@@ -53,9 +64,12 @@ export default function QuizSummery({setMoreResultInfo}:{setMoreResultInfo:any})
           </p>
         </div>
         <Button
-        // onClick={()=>dispatch(quizResultCheck())}
-        onClick={()=>setMoreResultInfo(true)}
-        className="mt-5">Check Quiz Result</Button>
+          // onClick={()=>dispatch(quizResultCheck())}
+          onClick={() => setMoreResultInfo(true)}
+          className="mt-5"
+        >
+          Check Quiz Result
+        </Button>
       </CardContent>
     </Card>
   );

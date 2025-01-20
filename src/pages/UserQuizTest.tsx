@@ -1,60 +1,55 @@
-
 import Loading from "@/components/share/Loading";
 import { Question } from "@/Home/Question";
 import QuizSummery from "@/Home/QuizSummery";
 import { Result } from "@/Home/Result";
-import { useGetSingleQuizQuery } from "@/redux/features/quiz/quizApi";
-import { setQuiz } from "@/redux/features/quiz/quizSlice";
+import { useGetAllQuizQuery } from "@/redux/features/quiz/quizApi";
 import { useUserQuizResultQuery } from "@/redux/features/quizResult/quizResultApi";
-import { useAppDispatch } from "@/redux/hooks";
-import { useEffect, useState } from "react";
+import { IQuestion } from "@/types/quiz.type";
+import { getQuizById } from "@/utils/getQuizById";
+import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 const UserQuizTest = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const [mainLoading,setMainLoading]=useState(false)
-
-
+const navigate=useNavigate()
   // const { quizComplete, moreResultInfo ,} = useAppSelector(
   //   (state) => state.quiz
   // );
-  const { data, isLoading } = useGetSingleQuizQuery(id);
-  const { data:quizResultData, isLoading:quizResultLoading } = useUserQuizResultQuery(id);
-  const [moreResultInfo,setMoreResultInfo] =useState(false)
-
-  useEffect(()=>{
-    setMainLoading(true)
-    if(!isLoading && data){
-      // console.log(data,"check quiz data")    
-      dispatch(setQuiz(data.data.questions))
-      // console.log(data,"check quiz dataasdfasdfasdfsf")
-      setMainLoading(false)    
+  // const { data, isLoading } = useGetAllQuizQuery(undefined);
+  const { data: quizResultData, isLoading: quizResultLoading } =
+    useUserQuizResultQuery(id);
+    const { data, isLoading } = useGetAllQuizQuery(undefined);
+  const [moreResultInfo, setMoreResultInfo] = useState(false);
+ 
+  let filterCurrentQuiz;
+  if (!isLoading) {
+    filterCurrentQuiz = getQuizById(data?.data, id!);
+    if (!filterCurrentQuiz) {
+      navigate("/");
     }
-    setMainLoading(false)
-  },[isLoading,data])
-  console.log(data, "check user id");
-  if (!isLoading && !data) {
-    navigate("/");
   }
-  
-  if (isLoading || mainLoading || quizResultLoading) {
-    return <Loading/>;
+  const question: IQuestion[] = filterCurrentQuiz?.questions || [];
+  // // console.log(data, "check user id");
+  // if (!isLoading && !data) {
+  //   navigate("/");
+  // }
+
+  if (quizResultLoading || isLoading) {
+    return <Loading />;
   }
-console.log(quizResultData,"quizResultData")
+
   return (
     <div className="w-full h-full">
       {/* <Header /> */}
       <div className="grid place-items-center min-h-svh w-full">
         {moreResultInfo ? (
-          <Result userAnswer={quizResultData?.data.userAnswer}/>
+          <Result question={question} userAnswer={quizResultData?.data.userAnswer} />
         ) : quizResultData?.data?.quizComplete ? (
-          <QuizSummery setMoreResultInfo={setMoreResultInfo}/>
+          <QuizSummery
+          setMoreResultInfo={setMoreResultInfo} question={question}/>
         ) : (
-          <Question />
-          )}
-
+          <Question question={question}/>
+        )}
       </div>
     </div>
   );

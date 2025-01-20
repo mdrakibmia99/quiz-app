@@ -31,7 +31,7 @@ export default function SignUp() {
   async function onSubmit(values: FieldValues) {
     try {
       const result = await signUp(values);
-      console.log(result, "result");
+      // console.log(result, "result");
       if (result.error) {
         toast.error("Email already exists");
       } else {

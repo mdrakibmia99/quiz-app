@@ -8,18 +8,18 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 // import { setAnswer } from "@/redux/features/quiz/quizSlice";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useAppDispatch } from "@/redux/hooks";
 
 import {
   nextQuestion,
   previousQuestion,
 } from "@/redux/features/quiz/quizSlice";
 import { useState } from "react";
+import { IQuestion } from "@/types/quiz.type";
 
-export function Result({userAnswer}:{userAnswer:string[]}) {
+export function Result({userAnswer,question}:{userAnswer:string[],question: IQuestion[]}) {
   const dispatch = useAppDispatch();
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const { question } = useAppSelector((state) => state.quiz);
   const currentQuestion = question[currentQuestionIndex];
   const currentAnswer = userAnswer[currentQuestionIndex];
   const handleNextQuestion = () => {

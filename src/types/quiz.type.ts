@@ -2,7 +2,7 @@ export interface IQuizResponse {
   _id: string;
   title: string;
   description: string;
-  questions: IQuestion;
+  questions: IQuestion[];
   createdAt: string;
   updatedAt: string;
   __v: number;

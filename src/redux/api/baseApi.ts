@@ -30,7 +30,7 @@ const baseQueryWithRefreshToken: BaseQueryFn<
   let result = await baseQuery(args, api, extraOption);
   //  console.log(result,"check for error");
   if (result?.error?.status === 401) {
-    console.log("sending refresh token");
+    // console.log("sending refresh token");
     const res = await fetch(`${import.meta.env.VITE_REACT_APP_SERVER_URI}/auth/refresh-token`, {
       method: "post",
       credentials: "include",
