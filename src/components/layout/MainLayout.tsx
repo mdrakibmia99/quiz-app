@@ -20,7 +20,7 @@ const MainLayout = () => {
   const token = useAppSelector(selectCurrentToken);
   const dispatch=useAppDispatch()
   const navigate=useNavigate()
-  const { data, isLoading,isError } = useGetAllQuizQuery(undefined);
+  const { data, isLoading } = useGetAllQuizQuery(undefined);
   const handleQuizStart=(quizId:string)=>{
     if(token){
        dispatch(setAnswer([]));
@@ -32,7 +32,7 @@ const MainLayout = () => {
   if (isLoading) {
     return <Loading/>;
   }
-console.log(data,isError,"all data loaded")
+// console.log(data,isError,"all data loaded")
   return (
     <div>
       <Header />
